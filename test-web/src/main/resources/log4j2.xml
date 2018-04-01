@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+    <properties>
+        <property name="PATTERN">[WEB] %-5level %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1.}(%L) %msg%n</property>
+    </properties>
+    <appenders>
+        <Console name="OUT" target="system_out">
+            <PatternLayout pattern="${PATTERN}" />
+        </Console>
+    </appenders>
+    <loggers>
+        <root level="DEBUG">
+            <appenderref ref="OUT" />
+        </root>
+    </loggers>
+</configuration>
