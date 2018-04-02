@@ -5,6 +5,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor;
+import org.springframework.core.env.ConfigurableEnvironment;
 
 import java.util.List;
 import java.util.UUID;
@@ -53,7 +54,7 @@ public abstract class BeanDefinitionRegistrySupport implements BeanDefinitionReg
         for (String packageName : packageNames) {
             ApplicationContextBox context;
             if (!beanAgentManager.containsKey(packageName)) {
-                context = beanAgentManager.getOrCreate(packageName);
+                context = beanAgentManager.getOrCreate(beanFactory.getBean(ConfigurableEnvironment.class), packageName);
                 beanAgentManager.add(packageName, context);
             } else {
                 context = beanAgentManager.getContextBox(packageName);

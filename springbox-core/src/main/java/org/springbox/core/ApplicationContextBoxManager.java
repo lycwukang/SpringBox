@@ -1,6 +1,8 @@
 package org.springbox.core;
 
 import org.springframework.context.ApplicationContext;
+import org.springframework.core.env.ConfigurableEnvironment;
+import org.springframework.core.env.StandardEnvironment;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,11 +28,11 @@ public class ApplicationContextBoxManager {
         return applicationContextAgents;
     }
 
-    public ApplicationContextBox getOrCreate(String packageName) {
+    public ApplicationContextBox getOrCreate(ConfigurableEnvironment environment, String packageName) {
         if (registerApplicationContextAgent.containsKey(packageName)) {
             return registerApplicationContextAgent.get(packageName);
         }
-        ApplicationContextBox applicationContextBox = new ApplicationContextBox(packageName);
+        ApplicationContextBox applicationContextBox = new ApplicationContextBox(environment, packageName);
         registerApplicationContextAgent.put(packageName, applicationContextBox);
         registerApplicationContext.put(packageName, applicationContextBox.getContext());
         return applicationContextBox;

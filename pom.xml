@@ -14,6 +14,7 @@
         <module>test-member</module>
         <module>test-account</module>
         <module>test-web</module>
+        <module>test-webxml</module>
     </modules>
 
     <dependencies>
