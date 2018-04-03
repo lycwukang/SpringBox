@@ -6,6 +6,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.ConfigurableEnvironment;
+import org.springframework.core.env.StandardEnvironment;
 
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
@@ -43,8 +44,13 @@ public class ApplicationContextBox {
     public ApplicationContextBox(ConfigurableEnvironment environment, String... basePackages) {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
         context.scan(basePackages);
-        if (environment != null)
-            context.setEnvironment(environment);
+        if (environment != null) {
+            // 立即刷新profiles
+            ConfigurableEnvironment configurableEnvironment = new StandardEnvironment();
+            configurableEnvironment.setDefaultProfiles(environment.getDefaultProfiles());
+            configurableEnvironment.setActiveProfiles(environment.getActiveProfiles());
+            context.setEnvironment(configurableEnvironment);
+        }
         context.refresh();
         this.context = context;
     }

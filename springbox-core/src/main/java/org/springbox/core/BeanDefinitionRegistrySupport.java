@@ -64,7 +64,6 @@ public abstract class BeanDefinitionRegistrySupport implements BeanDefinitionReg
                 register(beanFactory, beanInfo.getName(), beanInfo.getObj(), beanInfo.getClazz());
             }
         }
-        System.out.print("");
     }
 
     private void register(ConfigurableListableBeanFactory beanFactory, String beanName, Object object, Class<?> clazz) {
